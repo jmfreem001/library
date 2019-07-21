@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div.intro
+    h1= title
+    p Welcome to #{title} app a simple app that allows you to monitor your books.
+
+  div.sidebar
+    button#new-book NEW BOOK
+
+  div.container
+    each book in myLibrary
+      div.card
+        h3= book.title
+        p= book.author
+        p= `${book.pages} pages`
+        p= `This book ${book.readString()}`
+        hr
+        button#remove REMOVE
+        button#change-read Change read status
+

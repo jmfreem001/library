@@ -1,0 +1,49 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: grid;
+  grid-template-columns: .08fr 1fr 1fr 1fr;
+  grid-template: 
+   "intro intro intro intro"
+   "sidebar container container container"
+}
+.intro{
+  grid-area: intro;
+}
+.sidebar{
+  grid-area: sidebar;
+}
+
+.container{
+  grid-area: container;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+a {
+  color: #00B7FF;
+}
+
+.card{
+
+  padding: 2px;
+  margin-bottom: 20px;
+  border: 1px dotted black;
+  width: 85%;
+}
+
+.read{
+  background-color: green
+}
+
+.unread{
+  background-color: red;
+}
+
+button{
+  border-radius: 2%;
+  margin: 5px;
+  padding: 5px;
+  background-color: lightblue;
+  
+}
