@@ -4,11 +4,13 @@ body {
   display: grid;
   grid-template-columns: .08fr 1fr 1fr 1fr;
   grid-template: 
-   "intro intro intro intro"
+   "form intro intro ."
    "sidebar container container container"
 }
 .intro{
   grid-area: intro;
+
+  
 }
 .sidebar{
   grid-area: sidebar;
@@ -22,6 +24,15 @@ body {
 
 a {
   color: #00B7FF;
+}
+.form{
+  grid-area: form;
+  margin: 5px;
+}
+
+.form-element{
+  margin: 5px;
+  border-radius: 3%;
 }
 
 .card{
@@ -45,5 +56,9 @@ button{
   margin: 5px;
   padding: 5px;
   background-color: lightblue;
+  
+}
+
+button.change-read{
   
 }

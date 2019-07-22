@@ -5,17 +5,38 @@ block content
     h1= title
     p Welcome to #{title} app a simple app that allows you to monitor your books.
 
+  div.form 
+    form(action="/add" method="post")
+      input.form-element(type="text" name= "title" placeholder="Book Title")
+      br
+      input.form-element(type="text" name= "author" placeholder="Book Author")
+      br
+      input.form-element(type="number" name= "pages" min="1")
+      label(for="pages") Pages
+      br
+      label(for="read") Read status:
+      select.form-element( name= "read")
+        option(value="read") Read
+        option(value="unread" selected) Unread
+      br
+      input(type="submit" value="Add Book") 
+
   div.sidebar
     button#new-book NEW BOOK
 
   div.container
+    -var n = 0;
     each book in myLibrary
-      div.card
+      div.card(data-id= n++)
         h3= book.title
         p= book.author
         p= `${book.pages} pages`
         p= `This book ${book.readString()}`
         hr
-        button#remove REMOVE
-        button#change-read Change read status
+        button.remove Remove Book
+        if book.read
+          button.change-read  Mark as unread
+        else
+          button.change-read  Mark as read
+
 

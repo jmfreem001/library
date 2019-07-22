@@ -1,29 +1,57 @@
-let SoS = new Book('Storm of Swords', 'George R.R. Martin', 933, true);
-let WaP = new Book('War and Peace', 'Leo Tolstoy', 1225, false);
-let DQ = new Book('Don Quixote', 'Miguel Cervantes', 863, true);
-let MD = new Book('Mody Dick', 'Herman Melville', 585, false);
-
-let myLibrary = [SoS, WaP, DQ, MD];
-
-function Book(title, author, pages, read){
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read
-    this.info = () => {
-        // readString = read? 'has been read': 'not read yet';
-        return (`${this.title} by ${self.author}, ${pages} pages, ${this.readString()}`)
-    }
-    this.readString = () => {
-        return this.read? 'has been read': 'not been read yet';
-    }
-}
-
-const book = new Book()
 
 function addBookToLibrary(){
     // TODO
 }
 
+// Button listeners
 
-module.exports = myLibrary
+// New book button
+
+let newButton = document.getElementById('new-book');
+newButton.addEventListener('click', popupHandler);
+
+//  change read status button
+
+let readButtons = document.querySelectorAll('.change-read');
+readButtons.forEach(button => button.addEventListener('click', readStatusHandler));
+
+
+let removeButtons = document.querySelectorAll('.remove');
+removeButtons.forEach(button => button.addEventListener('click', removeHandler));
+
+function readStatusHandler(e){
+    let card = e.target.parentNode;
+    let id = card.dataset.id;
+    let obj = {"id": id}
+    // TODO;
+    alert(`Parent node says ${e.target.parentNode.children[3].textContent}`);
+}
+
+function removeHandler(e){
+    let card = e.target.parentNode;
+    let id = card.dataset.id;
+    let obj = {"id": id}
+    card.parentNode.removeChild(card);
+    fetch('/delete', {
+        method: 'POST',
+        body: JSON.stringify(obj),
+        headers: { "Content-Type": "application/json"}
+    })
+      .then(function(response) {
+          if (response.ok) {
+            console.log(`event triggered:`);  
+            return;
+          }
+          throw new Error(`Request failed. ${response.statusText} - sent ${obj.id}`);
+      })
+       .catch(function(error) {
+           console.log(error);
+       });
+}
+
+
+
+
+function popupHandler(e){
+// TODO
+}
