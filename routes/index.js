@@ -34,5 +34,17 @@ router.post('/delete', function(req, res, next) {
   res.redirect('/');
 });
 
+router.post('/read', function(req, res, next) {
+  let id = req.body.id;
+  // console.log(req.body);
+  let obj = myLibrary[id];
+  console.log(obj)
+  obj.changeReadStatus();
+  myLibrary.splice(id, 1, obj)
+  console.log(obj)
+  res.redirect('/');
+})
+
+
 
 module.exports = router;

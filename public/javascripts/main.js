@@ -23,8 +23,22 @@ function readStatusHandler(e){
     let card = e.target.parentNode;
     let id = card.dataset.id;
     let obj = {"id": id}
-    // TODO;
-    alert(`Parent node says ${e.target.parentNode.children[3].textContent}`);
+
+    fetch('/read', {
+        method: 'POST', 
+        body: JSON.stringify(obj),
+        headers: { "Content-Type": "application/json"}
+    })
+    .then(response => {
+        if (response.ok) {
+          console.log(`event triggered:`);  
+          return;
+        }
+        throw new Error(`Request failed. ${response.statusText} sent ${obj.id}`);
+    })
+     .catch(error => console.log(error));
+
+    
 }
 
 function removeHandler(e){
@@ -37,21 +51,23 @@ function removeHandler(e){
         body: JSON.stringify(obj),
         headers: { "Content-Type": "application/json"}
     })
-      .then(function(response) {
+      .then(response => {
           if (response.ok) {
             console.log(`event triggered:`);  
             return;
           }
-          throw new Error(`Request failed. ${response.statusText} - sent ${obj.id}`);
+          throw new Error(`Request failed. ${response.statusText}`);
       })
-       .catch(function(error) {
-           console.log(error);
-       });
+       .catch(error => console.log(error));
 }
 
 
-
-
 function popupHandler(e){
-// TODO
+    let form = document.getElementById('popup');
+    // let elements = document.querySelectorAll('.form-element')
+    let display = (form.style.display === "none")? "block": "none";
+    form.style.display = display;
+    // let display = (form.getAttribute('visibility') === "visible")? "hidden":"visible";
+    // form.setAttribute('visibility', display);
+    // elements.forEach(element => element.setAttribute('visibility', display));
 }

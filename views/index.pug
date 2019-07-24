@@ -6,12 +6,12 @@ block content
     p Welcome to #{title} app a simple app that allows you to monitor your books.
 
   div.form 
-    form(action="/add" method="post")
-      input.form-element(type="text" name= "title" placeholder="Book Title")
+    form#popup(action="/add" method="post" style="display:none")
+      input.form-element(type="text" name= "title" required placeholder="Book Title")
       br
-      input.form-element(type="text" name= "author" placeholder="Book Author")
+      input.form-element(type="text" name= "author" required placeholder="Book Author")
       br
-      input.form-element(type="number" name= "pages" min="1")
+      input.form-element(type="number" required name= "pages" min="1" default="10")
       label(for="pages") Pages
       br
       label(for="read") Read status:
@@ -29,9 +29,10 @@ block content
     each book in myLibrary
       div.card(data-id= n++)
         h3= book.title
-        p= book.author
-        p= `${book.pages} pages`
-        p= `This book ${book.readString()}`
+        //- p= book.author
+        //- p= `${book.pages} pages`
+        //- p= `This book ${book.readString()}`
+        p= book.info()
         hr
         button.remove Remove Book
         if book.read
