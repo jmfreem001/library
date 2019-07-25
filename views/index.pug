@@ -6,38 +6,25 @@ block content
     p Welcome to #{title} app a simple app that allows you to monitor your books.
 
   div.form 
-    form#popup(action="/add" method="post" style="display:none")
-      input.form-element(type="text" name= "title" required placeholder="Book Title")
+    form#popup(style="display:none")
+      input.form-element(type="text" id="title" name= "title" required placeholder="Book Title")
       br
-      input.form-element(type="text" name= "author" required placeholder="Book Author")
+      input.form-element(type="text" id="author" name= "author" required placeholder="Book Author")
       br
-      input.form-element(type="number" required name= "pages" min="1" default="10")
+      input.form-element(type="number" id="pages" required name= "pages" min="1" default="10")
       label(for="pages") Pages
       br
       label(for="read") Read status:
-      select.form-element( name= "read")
+      select.form-element( id="read" name= "read")
         option(value="read") Read
         option(value="unread" selected) Unread
       br
-      input(type="submit" value="Add Book") 
+      input#submit-button(type="submit" value="Add Book") 
 
   div.sidebar
-    button#new-book NEW BOOK
+    button#new-book Toggle New Book Form
 
   div.container
-    -var n = 0;
-    each book in myLibrary
-      div.card(data-id= n++)
-        h3= book.title
-        //- p= book.author
-        //- p= `${book.pages} pages`
-        //- p= `This book ${book.readString()}`
-        p= book.info()
-        hr
-        button.remove Remove Book
-        if book.read
-          button.change-read  Mark as unread
-        else
-          button.change-read  Mark as read
+
 
 

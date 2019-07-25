@@ -1,23 +1,23 @@
-function Book(title, author, pages, read){
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read
-    this.info = () => {
-        // readString = read? 'has been read': 'not read yet';
-        return (`${this.title} by ${this.author}, ${this.pages} pages, ${this.readString()}`)
-    }
-    this.readString = () => {
-        return this.read? 'has been read': 'not been read yet';
-    }
-  }
+// function Book(title, author, pages, read){
+//     this.title = title,
+//     this.author = author,
+//     this.pages = pages,
+//     this.read = read
+//     this.info = () => {
+//         // readString = read? 'has been read': 'not read yet';
+//         return (`${this.title} by ${this.author}, ${this.pages} pages, ${this.readString()}`)
+//     }
+//     this.readString = () => {
+//         return this.read? 'has been read': 'not been read yet';
+//     }
+//   }
   
-  const book = new Book()
+//   const book = new Book()
   
-  Book.prototype.changeReadStatus = function() {
-    // toggle read status to its opposite whenever called. 
-    this.read = !this.read;
-  }
+//   Book.prototype.changeReadStatus = function() {
+//     // toggle read status to its opposite whenever called. 
+//     this.read = !this.read;
+//   }
 
-  module.exports = Book;
+//   module.exports = Book;
 

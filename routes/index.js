@@ -3,18 +3,18 @@ var path = require('path');
 var Book = require(path.join(__dirname, '..', 'models/Book.js'))
 var router = express.Router();
 
-let SoS = new Book('Storm of Swords', 'George R.R. Martin', 933, true);
-let WaP = new Book('War and Peace', 'Leo Tolstoy', 1225, false);
-let DQ = new Book('Don Quixote', 'Miguel Cervantes', 863, true);
-let MD = new Book('Moby Dick', 'Herman Melville', 585, false);
+// let SoS = new Book('Storm of Swords', 'George R.R. Martin', 933, true);
+// let WaP = new Book('War and Peace', 'Leo Tolstoy', 1225, false);
+// let DQ = new Book('Don Quixote', 'Miguel Cervantes', 863, true);
+// let MD = new Book('Moby Dick', 'Herman Melville', 585, false);
 
-let myLibrary = [SoS, WaP, DQ, MD];
+// let myLibrary = [SoS, WaP, DQ, MD];
 
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Library', myLibrary: myLibrary });
+  res.render('index', { title: 'Library'});
 });
 
 /* POST to add book to home page. */
