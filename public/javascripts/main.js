@@ -1,7 +1,5 @@
 // import { directive } from "babel-types";
 
-
-
 function Book(title, author, pages, read){
     this.title = title,
     this.author = author,
@@ -33,25 +31,25 @@ let myLibrary = [SoS, WaP, DQ, MD];
 render()
 
 
-function addBookToLibrary(){
-    // TODO get form data into object and 
-    let form = document.querySelector('form')
-    let formData = new FormData(form);
-    // console.log(formData)
-    // for(var [key, value] of formData.entries()) {
-    //     console.log(key, value); 
-    // }
-    console.log(...formData);
-    // let title = document.getElementById('title').textContent
-    // let author = document.getElementById('author').textContent
-    // let pages = document.getElementById('pages').textContent
-    // let read = document.getElementById('read').textContent
-    let readStatus = (formData.read === "read")? true: false;
-    let book = new Book(formData.title, formData.author, formData.pages, readStatus)
+function addBookToLibrary(e){
+
+    e.preventDefault()
+    let title = document.getElementById('title')
+    let author = document.getElementById('author')
+    let pages = document.getElementById('pages')
+    let read = document.getElementById('read')
+    let readStatus = (read === "read")? true: false;
+    let book = new Book(title.value, author.value, pages.value, readStatus)
     myLibrary.push(book);
     console.log(myLibrary);
+    // Reset values after update
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    // Hide form after submission
+    popupHandler()
+    // Render the container with the nre book. 
     render()
-
 }
 
 function render() {
@@ -87,7 +85,6 @@ function render() {
         read.textContent = readText;
         card.appendChild(read);
     }
-    // Button listeners
 
     // New book button
 
@@ -99,7 +96,7 @@ function render() {
     let readButtons = document.querySelectorAll('.change-read');
     readButtons.forEach(button => button.addEventListener('click', readStatusHandler));
 
-
+    // Handle remove button
     let removeButtons = document.querySelectorAll('.remove');
     removeButtons.forEach(button => button.addEventListener('click', removeHandler));
 }
@@ -109,7 +106,7 @@ submitButton.addEventListener('click', addBookToLibrary);
 
 
 function readStatusHandler(e){
-
+    // Change the read status of the book. 
     let card = e.target.parentNode;
     let id = card.dataset.id;
     let obj = myLibrary[id];
@@ -131,11 +128,9 @@ function resetContainer(){
 }
 
 function removeHandler(e){
-    // TODO rewrite as client side only
-    // brinf the called funcitons in the routes over here
+    // Removes a card from the list
     let card = e.target.parentNode;
     let id = card.dataset.id;
-    // let obj = {"id": id}
     card.parentNode.removeChild(card);
     myLibrary.splice(id, 1)
     console.log(myLibrary);
@@ -144,6 +139,7 @@ function removeHandler(e){
 
 
 function popupHandler(e){
+    // Opens and closes the form. 
     let form = document.getElementById('popup');
     let display = (form.style.display === "none")? "block": "none";
     form.style.display = display;
