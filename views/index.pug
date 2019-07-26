@@ -7,11 +7,11 @@ block content
 
   div.form 
     form#popup(style="display:none")
-      input.form-element(type="text" id="title" name= "title" required placeholder="Book Title")
+      input.form-element(type="text" id="title" name= "title"  placeholder="Book Title")
       br
-      input.form-element(type="text" id="author" name= "author" required placeholder="Book Author")
+      input.form-element(type="text" id="author" name= "author"  placeholder="Book Author")
       br
-      input.form-element(type="number" id="pages" required name= "pages" min="1" default="10")
+      input.form-element(type="number" id="pages" name= "pages" min="1" default="10")
       label(for="pages") Pages
       br
       label(for="read") Read status:
@@ -23,6 +23,8 @@ block content
 
   div.sidebar
     button#new-book Toggle New Book Form
+    hr
+    button#sample Reset Library to Sample Data
 
   div.container
 

@@ -5,30 +5,28 @@ function Book(title, author, pages, read){
     this.author = author,
     this.pages = pages,
     this.read = read
-    this.info = () => {
+    this.info = function(){
         // readString = read? 'has been read': 'not read yet';
         return (`${this.title} by ${this.author}, ${this.pages} pages, ${this.readString()}`)
     }
-    this.readString = () => {
+    this.readString = function(){
         return this.read? 'has been read': 'not been read yet';
     }
   }
   
-const book = new Book()
 
 Book.prototype.changeReadStatus = function() {
     // toggle read status to its opposite whenever called. 
     this.read = !this.read;
 }
-let SoS = new Book('Storm of Swords', 'George R.R. Martin', 933, true);
-let WaP = new Book('War and Peace', 'Leo Tolstoy', 1225, false);
-let DQ = new Book('Don Quixote', 'Miguel Cervantes', 863, true);
-let MD = new Book('Moby Dick', 'Herman Melville', 585, false);
 
-let myLibrary = [SoS, WaP, DQ, MD];
+// resetLibrary()
+let myLibrary = []
 
 // render library items on page. 
 render()
+
+
 
 
 function addBookToLibrary(e){
@@ -39,9 +37,18 @@ function addBookToLibrary(e){
     let pages = document.getElementById('pages')
     let read = document.getElementById('read')
     let readStatus = (read === "read")? true: false;
+    // Add info into object
     let book = new Book(title.value, author.value, pages.value, readStatus)
+    // return with error if not all fields populated
+    if (title.value === '' || author.value === '' || pages.value === '' ){
+        alert('Please complete all fields.')
+        return;
+    }
+
     myLibrary.push(book);
-    console.log(myLibrary);
+
+    // Store values on client cpu.
+    localStorage.setItem('library', JSON.stringify(myLibrary));
     // Reset values after update
     title.value = '';
     author.value = '';
@@ -53,6 +60,17 @@ function addBookToLibrary(e){
 }
 
 function render() {
+
+    // Get object back from local storage
+    let library = JSON.parse(localStorage.getItem('library') || "[]" );
+    // rebuild each object into the library
+    myLibrary = []
+    for (let item of library){
+        let book = new Book(item.title, item.author, item.pages, item.read)
+        myLibrary.push(book);
+    }
+    console.log(myLibrary);
+
     // Loop through array of library and appendChild to divContatiner.
     let container = document.querySelector('.container');
     // Clear container before rendering. 
@@ -104,6 +122,20 @@ function render() {
 let submitButton = document.getElementById('submit-button');
 submitButton.addEventListener('click', addBookToLibrary);
 
+function fillSampleData(){
+    let SoS = new Book('Storm of Swords', 'George R.R. Martin', 933, true);
+    let WaP = new Book('War and Peace', 'Leo Tolstoy', 1225, false);
+    let DQ = new Book('Don Quixote', 'Miguel Cervantes', 863, true);
+    let MD = new Book('Moby Dick', 'Herman Melville', 585, false);
+
+    myLibrary = [SoS, WaP, DQ, MD];
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+    render()
+}
+
+let sampleButton = document.getElementById('sample');
+sampleButton.addEventListener('click', fillSampleData);
+
 
 function readStatusHandler(e){
     // Change the read status of the book. 
@@ -113,8 +145,8 @@ function readStatusHandler(e){
     console.log(obj)
     obj.changeReadStatus();
     myLibrary.splice(id, 1, obj)
+    localStorage.setItem('library', JSON.stringify(myLibrary));
 
-    console.log(myLibrary);
 
     render()
     
@@ -134,6 +166,7 @@ function removeHandler(e){
     card.parentNode.removeChild(card);
     myLibrary.splice(id, 1)
     console.log(myLibrary);
+    localStorage.setItem('library', JSON.stringify(myLibrary));
     render()
 }
 
