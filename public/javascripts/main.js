@@ -35,7 +35,7 @@ function addBookToLibrary(e){
     let author = document.getElementById('author')
     let pages = document.getElementById('pages')
     let read = document.getElementById('read')
-    let readStatus = (read === "read")? true: false;
+    let readStatus = (read.value === "read")? true: false;
     // Add info into object
     let book = new Book(title.value, author.value, pages.value, readStatus)
     // return with error if not all fields populated
