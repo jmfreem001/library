@@ -20,7 +20,6 @@ Book.prototype.changeReadStatus = function() {
     this.read = !this.read;
 }
 
-// resetLibrary()
 let myLibrary = []
 
 // render library items on page. 
@@ -83,14 +82,13 @@ function render() {
         container.appendChild(card);
         // Add title
         let title = document.createElement('h3');
+        title.setAttribute('class', 'card-title');
         title.textContent = book.title;
         card.appendChild(title);
         // Add book info
         let info = document.createElement('p');
         info.textContent = book.info();
         card.appendChild(info);
-        let hr = document.createElement('hr');
-        card.appendChild(hr);
         // Add remove button
         let remove = document.createElement('button');
         remove.setAttribute('class', "remove")
@@ -122,21 +120,6 @@ function render() {
 let submitButton = document.getElementById('submit-button');
 submitButton.addEventListener('click', addBookToLibrary);
 
-function fillSampleData(){
-    let SoS = new Book('Storm of Swords', 'George R.R. Martin', 933, true);
-    let WaP = new Book('War and Peace', 'Leo Tolstoy', 1225, false);
-    let DQ = new Book('Don Quixote', 'Miguel Cervantes', 863, true);
-    let MD = new Book('Moby Dick', 'Herman Melville', 585, false);
-
-    myLibrary = [SoS, WaP, DQ, MD];
-    localStorage.setItem('library', JSON.stringify(myLibrary));
-    render()
-}
-
-let sampleButton = document.getElementById('sample');
-sampleButton.addEventListener('click', fillSampleData);
-
-
 function readStatusHandler(e){
     // Change the read status of the book. 
     let card = e.target.parentNode;
@@ -146,10 +129,7 @@ function readStatusHandler(e){
     obj.changeReadStatus();
     myLibrary.splice(id, 1, obj)
     localStorage.setItem('library', JSON.stringify(myLibrary));
-
-
-    render()
-    
+    render()   
 }
 
 function resetContainer(){
@@ -176,4 +156,5 @@ function popupHandler(e){
     let form = document.getElementById('popup');
     let display = (form.style.display === "none")? "block": "none";
     form.style.display = display;
+    form.classList.toggle('form-visible');
 }

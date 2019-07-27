@@ -1,17 +1,42 @@
 body {
-  padding: 50px;
+  background-color: lightgray;
+  color: black;
+/*   padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: grid;
   grid-template-columns: .08fr 1fr 1fr 1fr;
   grid-template: 
-   "form intro intro ."
-   "sidebar container container container"
+   "intro intro intro intro"
+   "intro-text intro-text intro-text intro-text"
+/*     "form . . ."     */
+    "sidebar container container container"
+   "form container container container"
 }
 .intro{
   grid-area: intro;
-
-  
+ background-color: #47036a;
+  border-radius: 2%;
+  text-align: center;
+  color: white;
+  border: 4px solid black;
+  border-radius: 1%;
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  width: 100%
 }
+.intro-text{
+  grid-area: intro-text;
+  background-color: #0d0d0d;
+  margin-top:15px;
+  margin-bottom: 50px;
+  text-align: center;
+  height: 40px;
+  color: white;
+  border: 4px solid black;
+  border-radius: 1%;
+  width:100%
+}
+
 .sidebar{
   grid-area: sidebar;
 }
@@ -27,7 +52,17 @@ a {
 }
 .form{
   grid-area: form;
+
+}
+
+.form-visible{
   margin: 5px;
+  margin-right: 20px;
+  background-color: gray;
+  color: black;
+  padding:10px;
+  border: 4px solid black;
+  border-radius: 3%;
 }
 
 .form-element{
@@ -36,32 +71,42 @@ a {
 }
 
 .card{
-
-  padding: 2px;
+  text-align: center;
   margin-bottom: 20px;
-  border: 1px dotted black;
+
+  border: 4px solid black;
+  border-radius: 3%;
   width: 85%;
+  background-color: gray;
+  color: black;
 }
 
-.read{
-  background-color: green
-}
-
-.unread{
-  background-color: red;
+.card-title{
+  background-color: #47036a;
+  padding: 25px;
+  color: white;
+  margin: 0;
 }
 
 button{
   border-radius: 2%;
   margin: 5px;
   padding: 5px;
-  background-color: lightblue;
+  background-color: black;
+  color: lavenderblush;
   
 }
 
-button.change-read{
-  
+#submit-button{
+  color: white;
+  background-color: #47036a;
+  border-radius: 2%;
+  margin: 5px;
+  padding: 5px;
+  width: 90%;
+/*   text-align: center; */
 }
 #new-book{
   width:85%;
 }
+
